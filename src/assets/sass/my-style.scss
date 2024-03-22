@@ -7,10 +7,5 @@
 
   @media (max-width: 800px) {
     flex-direction: column;
-
-    & > .-sidebar {
-      position: sticky;
-      top: 0;
-    }
   }
 }
