@@ -16,7 +16,13 @@
       <Menu />
 
       <div class="app__layout">
-        <Panes />
+        <div class="my-style">
+          <div class="-sidebar">
+            <Promo />
+          </div>
+
+          <Panes class="-aggr" />
+        </div>
       </div>
     </div>
   </div>
@@ -38,6 +44,7 @@ import { Component, Vue } from 'vue-property-decorator'
 
 import aggregatorService from './services/aggregatorService'
 
+import Promo from '@/components/promo/Promo.vue'
 import Loader from '@/components/framework/Loader.vue'
 import Notices from '@/components/framework/Notices.vue'
 import Menu from '@/components/Menu.vue'
@@ -61,7 +68,8 @@ import { pathToBase64 } from './utils/helpers'
     Menu,
     Notices,
     Panes,
-    Loader
+    Loader,
+    Promo
   },
   watch: {
     '$store.state.panes.marketsListeners'(newMarkets, previousMarkets) {

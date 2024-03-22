@@ -183,7 +183,7 @@ export default class Dialog extends Vue {
 
   handleDrag(event) {
     if (
-      this._handleTranslateRelease || 
+      this._handleTranslateRelease ||
       event.button === 2 ||
       event.target.classList.contains('-no-grab') ||
       event.target.parentElement.classList.contains('-no-grab')

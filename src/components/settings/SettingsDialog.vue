@@ -351,7 +351,7 @@
     </ToggableSection>
 
     <template v-slot:footer>
-      <a
+      <!-- <a
         class="btn -text mrauto"
         href="https://github.com/Tucsky/aggr"
         target="_blank"
@@ -365,7 +365,7 @@
       <span>
         <dono-dropdown class="-top -text-left" />
       </span>
-      <i class="settings-footer__divider -center mr4">|</i>
+      <i class="settings-footer__divider -center mr4">|</i> -->
       <span>
         <button
           type="button"
@@ -414,7 +414,7 @@ export default {
     Exchange,
     AudioSettings,
     OtherSettings,
-    DonoDropdown,
+    // DonoDropdown,
     ColorPickerControl,
     ToggableSection
   },
