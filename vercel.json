@@ -1,10 +1,10 @@
 {
   "routes": [
     {
-      "src": "/old-path/(.*)",
+      "src": "/(.*)",
       "status": 307,
       "headers": {
-        "Location": "/new-path"
+        "Location": "/"
       }
     }
   ]
