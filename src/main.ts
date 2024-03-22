@@ -3,7 +3,6 @@ import App from './App.vue'
 import VueTippy, { TippyComponent } from 'vue-tippy'
 import './assets/sass/app.scss'
 import store from './store'
-import router from './router' // Import the router
 
 import Editable from '@/components/framework/Editable.vue'
 import DropdownComponent from '@/components/framework/Dropdown.vue'
@@ -41,6 +40,5 @@ if ('serviceWorker' in navigator) {
 new Vue({
   el: '#app',
   store,
-  router,
   render: h => h(App)
 })
