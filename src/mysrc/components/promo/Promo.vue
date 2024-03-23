@@ -14,10 +14,10 @@
     </a>
 
     <a class="link" href="https://discord.com/invite/3DxttevJCG" target="_blank"
-      >거래소 1:1문의</a
+      >1:1문의</a
     >
     <a class="link link-divider" href="https://coincast.kr" target="_blank"
-      >실시간 비트코인 뉴스</a
+      >실시간 코인뉴스</a
     >
 
     <p class="link">김프: {{ kimchiPremium }}</p>
