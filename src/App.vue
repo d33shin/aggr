@@ -44,7 +44,7 @@ import { Component, Vue } from 'vue-property-decorator'
 
 import aggregatorService from './services/aggregatorService'
 
-import Promo from '@/components/promo/Promo.vue'
+import Promo from '@/mysrc/components/promo/Promo.vue'
 import Loader from '@/components/framework/Loader.vue'
 import Notices from '@/components/framework/Notices.vue'
 import Menu from '@/components/Menu.vue'
