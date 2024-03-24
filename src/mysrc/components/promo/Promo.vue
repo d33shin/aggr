@@ -20,14 +20,32 @@
       >실시간 코인뉴스</a
     >
 
-    <p class="link">김프: {{ kimchiPremium }}</p>
+    <p class="link">
+      김프<br />
+      <span
+        :class="{ positive: kimchiPremium >= 0, negative: kimchiPremium < 0 }"
+      >
+        {{ kimchiPremium }}%
+      </span>
+    </p>
+    <p class="link">
+      펀딩비 (바이낸스)
+      <br />
+      <span :class="{ positive: fundingFee >= 0, negative: fundingFee < 0 }">
+        {{ fundingFee }}%
+      </span>
+      <br />
+      {{ fundingFeeCountdown }}
+    </p>
   </div>
 </template>
 
 <script lang="ts">
 import {
   getBinanceBTCPrice,
-  getUpbitBTCPrice
+  getUpbitBTCPrice,
+  getBinanceBTCCountdown,
+  getBinanceBTCFundingRate
 } from '@/mysrc/services/cryptoService'
 import { getWonUsdExchangeRate } from '@/mysrc/services/exchangeRateService'
 
@@ -40,7 +58,7 @@ async function calculateKimchiPremium() {
   const binancePriceInKRW = binancePrice * exchangeRate
   const premium = upbitPrice - binancePriceInKRW
   const premiumPercentage = (premium / binancePriceInKRW) * 100
-  const roundedPremiumPercentage = premiumPercentage.toFixed(2) + '%'
+  const roundedPremiumPercentage = premiumPercentage.toFixed(2)
   return roundedPremiumPercentage
 }
 
@@ -49,13 +67,20 @@ export default {
   data() {
     return {
       kimchiPremium: null,
+      fundingFee: null,
+      fundingFeeCountdown: null,
       intervalId: null
     }
   },
   async created() {
     this.kimchiPremium = await calculateKimchiPremium()
+    this.fundingFee = await getBinanceBTCFundingRate()
+    this.fundingFeeCountdown = await getBinanceBTCCountdown()
+    console.log(this.fundingFeeCountdown)
     this.intervalId = setInterval(async () => {
       this.kimchiPremium = await calculateKimchiPremium()
+      this.fundingFee = await getBinanceBTCFundingRate()
+      this.fundingFeeCountdown = await getBinanceBTCCountdown()
     }, 1000)
   },
   beforeDestroy() {
@@ -99,5 +124,12 @@ div {
   display: inline-block;
   font-weight: bold;
   padding-top: 10px;
+}
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
 }
 </style>
