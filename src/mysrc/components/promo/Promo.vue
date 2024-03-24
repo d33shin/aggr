@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <a
       class="link link-divider"
       href="http://discord.com/invite/XZ6fJTFNx7"
@@ -21,15 +21,28 @@
     >
 
     <p class="link">
-      김프<br />
+      <strong>김프</strong>
+      <br />
       <span
         :class="{ positive: kimchiPremium >= 0, negative: kimchiPremium < 0 }"
       >
         {{ kimchiPremium }}%
       </span>
     </p>
+
     <p class="link">
-      펀딩비 (바이낸스)
+      <strong>탐욕지수</strong><br />
+      <span>
+        {{ fearAndGreedIndex.latest }} ({{
+          fearAndGreedIndex.changePercentage
+        }}%)
+      </span>
+      <!-- <br />
+      {{ fearAndGreedIndex.status }} -->
+    </p>
+
+    <p class="link">
+      <strong>펀딩비</strong>
       <br />
       <span :class="{ positive: fundingFee >= 0, negative: fundingFee < 0 }">
         {{ fundingFee }}%
@@ -45,7 +58,8 @@ import {
   getBinanceBTCPrice,
   getUpbitBTCPrice,
   getBinanceBTCCountdown,
-  getBinanceBTCFundingRate
+  getBinanceBTCFundingRate,
+  getFearAndGreedIndex
 } from '@/mysrc/services/cryptoService'
 import { getWonUsdExchangeRate } from '@/mysrc/services/exchangeRateService'
 
@@ -69,6 +83,11 @@ export default {
       kimchiPremium: null,
       fundingFee: null,
       fundingFeeCountdown: null,
+      fearAndGreedIndex: {
+        latest: null,
+        changePercentage: null,
+        status: null
+      },
       intervalId: null
     }
   },
@@ -76,7 +95,8 @@ export default {
     this.kimchiPremium = await calculateKimchiPremium()
     this.fundingFee = await getBinanceBTCFundingRate()
     this.fundingFeeCountdown = await getBinanceBTCCountdown()
-    console.log(this.fundingFeeCountdown)
+    await this.updateFearAndGreedIndex()
+    // 1분마다 갱신
     this.intervalId = setInterval(async () => {
       this.kimchiPremium = await calculateKimchiPremium()
       this.fundingFee = await getBinanceBTCFundingRate()
@@ -87,17 +107,24 @@ export default {
     clearInterval(this.intervalId)
   },
   methods: {
-    goToReferral() {
-      this.$router.push('/referral')
+    async updateFearAndGreedIndex() {
+      const fearAndGreedData = await getFearAndGreedIndex()
+      if (fearAndGreedData) {
+        this.fearAndGreedIndex.latest = fearAndGreedData.latest
+        this.fearAndGreedIndex.changePercentage =
+          fearAndGreedData.changePercentage
+        this.fearAndGreedIndex.status = fearAndGreedData.status
+      }
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-div {
+.main {
   display: flex;
   flex-direction: column;
+  font-size: 1.14rem;
 }
 
 .link {
