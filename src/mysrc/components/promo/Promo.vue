@@ -45,7 +45,7 @@
       <strong>펀딩비</strong>
       <br />
       <span :class="{ positive: fundingFee >= 0, negative: fundingFee < 0 }">
-        {{ fundingFee }}%
+        {{ fundingFee * 1 }}%
       </span>
       <br />
       {{ fundingFeeCountdown }}
