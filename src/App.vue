@@ -16,13 +16,13 @@
       <Menu />
 
       <div class="app__layout">
-        <div class="my-style">
+        <!-- <div class="my-style">
           <div class="-sidebar">
             <Promo />
-          </div>
+          </div> -->
 
-          <Panes class="-aggr" />
-        </div>
+        <Panes class="-aggr" />
+        <!-- </div> -->
       </div>
     </div>
   </div>

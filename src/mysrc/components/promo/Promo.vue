@@ -1,48 +1,18 @@
 <template>
   <div class="main">
-    <a
-      class="link link-divider"
-      href="http://discord.com/invite/XZ6fJTFNx7"
-      target="_blank"
-    >
-      <img class="logo" src="/_img/logos/cointok_logo.png" alt="코인톡 로고" />
-      <span class="logo-text">코인톡 바로가기</span></a
-    >
-
-    <a class="link" href="https://discord.com/invite/tWE7waTAnP" target="_blank"
-      >거래소 할인 최대 50%
-    </a>
-
-    <a class="link" href="https://discord.com/invite/3DxttevJCG" target="_blank"
-      >1:1문의</a
-    >
-    <a class="link link-divider" href="https://coincast.kr" target="_blank"
-      >실시간 코인뉴스</a
-    >
-
     <p class="link">
-      <strong>김프</strong>
-      <br />
-      <span
-        :class="{ positive: kimchiPremium >= 0, negative: kimchiPremium < 0 }"
-      >
-        {{ kimchiPremium }}%
-      </span>
-    </p>
-
-    <p class="link">
-      <strong>탐욕지수</strong><br />
+      <strong>SENTIMENT</strong><br />
       <span>
         {{ fearAndGreedIndex.latest }} ({{
           fearAndGreedIndex.changePercentage
         }}%)
       </span>
-      <!-- <br />
-      {{ fearAndGreedIndex.status }} -->
+      <br />
+      {{ fearAndGreedIndex.status }}
     </p>
 
     <p class="link">
-      <strong>펀딩비</strong>
+      <strong>FUNDING FEE</strong>
       <br />
       <span :class="{ positive: fundingFee >= 0, negative: fundingFee < 0 }">
         {{ fundingFee * 1 }}%
